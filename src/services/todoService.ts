@@ -12,9 +12,9 @@ export const fetchTodos = async (): Promise<Todo[] | undefined> => {
 
 export const createTodo = async (todo: TodoCreateInput): Promise<Todo | undefined> => {
   try {
-    const { data: task } = await axios.post<Todo[]>(`${import.meta.env.VITE_API_URL}/tasks`, todo);
-    console.log(task[0]);
-    return task[0];
+    const { data: task } = await axios.post<Todo>(`${import.meta.env.VITE_API_URL}/tasks`, todo);
+    console.log(task);
+    return task;
   } catch (error) {
     console.error("Error creating todo:", error);
   }
@@ -22,9 +22,8 @@ export const createTodo = async (todo: TodoCreateInput): Promise<Todo | undefine
 
 export const updateTodo = async (id: string, update: TodoUpdateInput): Promise<Todo | undefined> => {
   try {
-    const { data: task } = await axios.put<Todo[]>(`${import.meta.env.VITE_API_URL}/tasks/${id}`, update);
-    console.log(task[0]);
-    return task[0];
+    const { data: task } = await axios.put<Todo>(`${import.meta.env.VITE_API_URL}/tasks/${id}`, update);
+    return task;
   } catch (error) {
     console.error("Error updating todo:", error);
   }
@@ -32,7 +31,7 @@ export const updateTodo = async (id: string, update: TodoUpdateInput): Promise<T
 
 export const deleteTodo = async (id: string): Promise<void> => {
   try {
-    await axios.delete<Todo[]>(`${import.meta.env.VITE_API_URL}/tasks/${id}`);
+    await axios.delete<Todo>(`${import.meta.env.VITE_API_URL}/tasks/${id}`);
   } catch (error) {
     console.error("Error deleting todo:", error);
   }
